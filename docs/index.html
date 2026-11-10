@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANSI X12 EDI Sample Files &amp; Retail Specification Encyclopedia (850, 856, 810, 997)</title>
+  <meta name="description" content="Open-source production ANSI X12 EDI sample files (850 Purchase Order, 856 ASN SOTPI, 810 Invoice, 855, 846, 820, 824, 997) for Walmart, Target, Amazon Vendor Central, Home Depot, Costco &amp; Kroger." />
+  <link rel="canonical" href="https://laozhang713.github.io/ansi-x12-edi-sample-files/" />
+  <meta property="og:title" content="ANSI X12 EDI Sample Files &amp; Retail Specification Encyclopedia" />
+  <meta property="og:description" content="12 production-grade ANSI X12 EDI sample files for Walmart, Target, Amazon, Home Depot, Costco &amp; Kroger with interactive QuickBooks/Shopify conversion guides." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://laozhang713.github.io/ansi-x12-edi-sample-files/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Dataset",
+        "name": "ANSI X12 Retail EDI Sample Files Dataset (004010 / 005010)",
+        "description": "12 production-grade ANSI X12 EDI sample files covering 850 Purchase Order, 856 Advance Ship Notice (5-Tier SOTPI), 810 Invoice, 855 PO Ack, 846 Inventory, 820 Remittance, 824 Application Advice, and 997 Functional Ack for Walmart, Target, Amazon Vendor Central, Home Depot, Costco, and Kroger.",
+        "url": "https://laozhang713.github.io/ansi-x12-edi-sample-files/",
+        "sameAs": "https://github.com/laozhang713/ansi-x12-edi-sample-files",
+        "license": "https://opensource.org/licenses/MIT",
+        "creator": {
+          "@type": "Organization",
+          "name": "EDIParse",
+          "url": "https://ediparse.com"
+        },
+        "keywords": [
+          "ANSI X12",
+          "EDI 850 Sample File",
+          "EDI 856 ASN SOTPI",
+          "EDI 810 Invoice",
+          "Walmart EDI 850 SDQ",
+          "Target 856 SSCC-18",
+          "Amazon Vendor Central EDI",
+          "QuickBooks IIF Converter"
+        ],
+        "distribution": {
+          "@type": "DataDownload",
+          "encodingFormat": "application/zip",
+          "contentUrl": "https://github.com/laozhang713/ansi-x12-edi-sample-files/releases/download/v1.0.0/ansi-x12-edi-samples-v1.0.0.zip"
+        }
+      },
+      {
+        "@type": "TechArticle",
+        "headline": "ANSI X12 EDI 850, 856 & 810 Segment Anatomy, Walmart SDQ Splits, and Target SOTPI Hierarchy",
+        "author": {
+          "@type": "Organization",
+          "name": "EDIParse Engineering",
+          "url": "https://ediparse.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "EDIParse",
+          "url": "https://ediparse.com"
+        },
+        "mainEntityOfPage": "https://laozhang713.github.io/ansi-x12-edi-sample-files/"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --accent: #059669;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      background-color: #f8fafc;
+      color: var(--text);
+      line-height: 1.65;
+    }
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 3.5rem 1.5rem;
+      border-bottom: 4px solid var(--primary);
+    }
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .badge {
+      background: rgba(37, 99, 235, 0.25);
+      border: 1px solid rgba(96, 165, 250, 0.4);
+      color: #93c5fd;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    header h1 {
+      font-size: 2.25rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+    header p {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      max-width: 840px;
+      margin-bottom: 1.75rem;
+    }
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.35rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.15s ease;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+    main {
+      padding: 2.5rem 1.5rem 4rem;
+    }
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #0f172a;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 0.5rem;
+    }
+    h3 {
+      font-size: 1.18rem;
+      margin: 1.5rem 0 0.65rem;
+      color: #1e293b;
+    }
+    p {
+      margin-bottom: 1rem;
+      color: #334155;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.75rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: #f8fafc;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    tr:hover td {
+      background: #f8fafc;
+    }
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 1.25rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      margin: 1rem 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 0.15rem 0.35rem;
+      border-radius: 0.25rem;
+      font-size: 0.88em;
+    }
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    .nav-card {
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      padding: 1.25rem;
+      background: #f8fafc;
+    }
+    .nav-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+      color: #0f172a;
+    }
+    .nav-card ul {
+      list-style: none;
+    }
+    .nav-card li {
+      margin-bottom: 0.45rem;
+      font-size: 0.92rem;
+    }
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #60a5fa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="badge-row">
+        <span class="badge">ANSI X12 004010 &amp; 005010</span>
+        <span class="badge">12 Retail EDI Samples</span>
+        <span class="badge">MIT Open-Source Dataset</span>
+      </div>
+      <h1>ANSI X12 EDI Sample Files &amp; Retail Compliance Encyclopedia</h1>
+      <p>
+        Production-ready ANSI X12 sample payloads (850 Purchase Order, 856 ASN 5-Tier SOTPI, 810 Invoice, 855 PO Ack, 846 Inventory, 820 Remittance, 824 Advice, and 997 Functional Ack) engineered for Walmart, Target, Amazon Vendor Central, The Home Depot, Costco, and Kroger integrations.
+      </p>
+      <div class="cta-group">
+        <a class="btn btn-primary" href="https://ediparse.com">Launch Interactive EDI Workbench (EDIParse.com)</a>
+        <a class="btn btn-secondary" href="https://github.com/laozhang713/ansi-x12-edi-sample-files">View GitHub Repository</a>
+        <a class="btn btn-secondary" href="https://github.com/laozhang713/ansi-x12-edi-sample-files/releases/tag/v1.0.0">Download v1.0.0 Sample Pack (.ZIP)</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="sample-catalog">
+      <h2>1. Production ANSI X12 EDI Sample Files Catalog (12 Files)</h2>
+      <p>
+        Every sample file in this dataset follows authentic big-box retail Message Implementation Guides (MIGs). Click any transaction below to inspect its segment loop structure or test live conversion inside the browser-based <a href="https://ediparse.com/tools/edi-viewer-inspector">ANSI X12 EDI Viewer &amp; Inspector</a>.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <th>X12 Set</th>
+              <th>Retailer Spec</th>
+              <th>Core Segments &amp; Compliance Scenarios</th>
+              <th>Interactive Parser &amp; Guide</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>walmart-850-crossdock.edi</code></td>
+              <td><strong>850 PO</strong></td>
+              <td><a href="https://ediparse.com/retailers/walmart-edi-850-856-810-converter">Walmart Supplier One</a></td>
+              <td><code>BEG*00*SA</code>, <code>REF*DP*0018</code>, <code>SAC</code> (<code>N2</code> implied decimal), <code>PO1</code>, <code>PO4</code>, <code>SDQ</code> 3-store split</td>
+              <td><a href="https://ediparse.com/transactions/edi-850-purchase-order">Inspect EDI 850 Spec</a></td>
+            </tr>
+            <tr>
+              <td><code>target-856-asn-sotpi.edi</code></td>
+              <td><strong>856 ASN</strong></td>
+              <td><a href="https://ediparse.com/retailers/target-partners-online-edi-converter">Target Partners Online</a></td>
+              <td>5-Tier <code>HL</code> (<code>S-O-T-P-I</code>), <code>BSN</code>, <code>TD1</code>, <code>TD5</code>, <code>PRF</code>, <code>MAN*GM</code> 20-digit <code>SSCC-18</code>, <code>LIN</code>, <code>SN1</code></td>
+              <td><a href="https://ediparse.com/transactions/edi-856-advance-ship-notice">Inspect EDI 856 SOTPI</a></td>
+            </tr>
+            <tr>
+              <td><code>amazon-810-invoice.edi</code></td>
+              <td><strong>810 Invoice</strong></td>
+              <td><a href="https://ediparse.com/retailers/amazon-vendor-central-edi-850-856">Amazon Vendor Central</a></td>
+              <td><code>BIG</code>, <code>IT1</code> with ASIN (<code>BP</code>) &amp; UPC (<code>UP</code>), <code>TDS</code> (<code>N2</code> cents), <code>SAC*A*D240</code> allowance, <code>ISS</code></td>
+              <td><a href="https://ediparse.com/transactions/edi-810-invoice">Inspect EDI 810 Spec</a></td>
+            </tr>
+            <tr>
+              <td><code>walmart-997-receipt-ack.edi</code></td>
+              <td><strong>997 Ack</strong></td>
+              <td><a href="https://ediparse.com/retailers/walmart-edi-850-856-810-converter">Walmart Retail Link</a></td>
+              <td><code>AK1*SH</code>, <code>AK2*856</code>, <code>AK5*A</code>, <code>AK9*A*2*2*2</code> confirming clean syntax receipt of 2 ASNs</td>
+              <td><a href="https://ediparse.com/transactions/edi-997-functional-ack">Inspect EDI 997 Spec</a></td>
+            </tr>
+            <tr>
+              <td><code>walmart-850-violations.edi</code></td>
+              <td><strong>850 Audit</strong></td>
+              <td><a href="https://ediparse.com/reference/errors/edi-824-997-rejection-codes">Chargeback Test Case</a></td>
+              <td>Deliberate errors: explicit decimal in <code>SAC05</code>, <code>SDQ</code> sum mismatch (<code>90 != 100</code>), wrong <code>SE01</code></td>
+              <td><a href="https://ediparse.com/reference/errors/edi-824-997-rejection-codes">View Error Diagnostics</a></td>
+            </tr>
+            <tr>
+              <td><code>walmart-855-po-ack.edi</code></td>
+              <td><strong>855 PO Ack</strong></td>
+              <td><a href="https://ediparse.com/transactions/edi-855-po-acknowledgment">Walmart Supplier One</a></td>
+              <td><code>BAK*00*AC</code> header acceptance, line-level <code>ACK*IA</code> (Item Accepted) with <code>068</code> ship date</td>
+              <td><a href="https://ediparse.com/transactions/edi-855-po-acknowledgment">Inspect EDI 855 Spec</a></td>
+            </tr>
+            <tr>
+              <td><code>homedepot-846-inventory.edi</code></td>
+              <td><strong>846 Stock</strong></td>
+              <td><a href="https://ediparse.com/retailers/home-depot-edi-compliance-converter">The Home Depot IDM</a></td>
+              <td><code>BIA*00*DD</code>, warehouse <code>N1*WH</code>, <code>LIN</code> (<code>UP</code>/<code>VN</code>/<code>IN</code>), <code>QTY*33</code> on-hand stock, <code>DTM*018</code></td>
+              <td><a href="https://ediparse.com/transactions/edi-846-inventory-inquiry">Inspect EDI 846 Spec</a></td>
+            </tr>
+            <tr>
+              <td><code>walmart-820-remittance.edi</code></td>
+              <td><strong>820 Remit</strong></td>
+              <td><a href="https://ediparse.com/transactions/edi-820-payment-order">Walmart AP Settlement</a></td>
+              <td><code>BPR</code> ACH wire transfer, <code>TRN</code> trace ID, <code>ENT</code>, <code>RMR*IV</code> net paid vs gross &amp; discount</td>
+              <td><a href="https://ediparse.com/transactions/edi-820-payment-order">Inspect EDI 820 Spec</a></td>
+            </tr>
+            <tr>
+              <td><code>amazon-824-application-advice.edi</code></td>
+              <td><strong>824 Advice</strong></td>
+              <td><a href="https://ediparse.com/transactions/edi-824-application-advice">Amazon Vendor AP</a></td>
+              <td><code>BGN</code>, <code>OTI*TR</code> (Transaction Set Rejected), <code>TED*848</code> (<code>TDS01</code> mismatch), <code>NTE*ERN</code> fix note</td>
+              <td><a href="https://ediparse.com/transactions/edi-824-application-advice">Inspect EDI 824 Spec</a></td>
+            </tr>
+            <tr>
+              <td><code>homedepot-850-rdc.edi</code></td>
+              <td><strong>850 PO</strong></td>
+              <td><a href="https://ediparse.com/retailers/home-depot-edi-compliance-converter">The Home Depot</a></td>
+              <td>Merchandising Dept <code>REF*DP*028</code>, Vendor <code>REF*IA*88210</code>, RDC <code>#5086</code>, <code>SDQ</code> 3-store allocation</td>
+              <td><a href="https://ediparse.com/retailers/home-depot-edi-compliance-converter">Home Depot Compliance</a></td>
+            </tr>
+            <tr>
+              <td><code>costco-850-depot.edi</code></td>
+              <td><strong>850 PO</strong></td>
+              <td><a href="https://ediparse.com/retailers/costco-edi-850-to-excel-quickbooks">Costco Wholesale</a></td>
+              <td>Sumner Depot <code>#270</code>, 7-digit Costco Item (<code>IN</code>), case UOM (<code>CA</code>), <code>PO4</code> pack rules, club <code>SDQ</code></td>
+              <td><a href="https://ediparse.com/retailers/costco-edi-850-to-excel-quickbooks">Costco EDI Converter</a></td>
+            </tr>
+            <tr>
+              <td><code>kroger-850-peyton-dc.edi</code></td>
+              <td><strong>850 PO</strong></td>
+              <td><a href="https://ediparse.com/retailers/kroger-edi-850-856-converter">The Kroger Co.</a></td>
+              <td>GLN (<code>UL</code>), Peyton Northern DC <code>#0512</code>, <code>UK</code> 14-digit GTIN case code, <code>SAC</code> promo allowance</td>
+              <td><a href="https://ediparse.com/retailers/kroger-edi-850-856-converter">Kroger EDI Converter</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="technical-deep-dive">
+      <h2>2. ANSI X12 Technical Deep Dive: Preventing $250–$750 Retail Chargebacks</h2>
+
+      <h3>2.1 Walmart Cross-Dock <code>SDQ</code> Destination Quantity Decompression</h3>
+      <p>
+        In cross-dock procurement (Walmart, Home Depot, Costco), the retailer ships freight to a single Regional Distribution Center (<code>N1*ST</code>) while embedding store-by-store allocation pairs inside the <a href="https://ediparse.com/reference/x12-segments/sdq-destination-quantity-cross-dock"><code>SDQ</code> (Destination Quantity) segment</a>:
+      </p>
+      <pre><code>PO1*1*100*EA*12.50*WE*UP*012345678905*IN*554433221*VN*SKU-TOWEL-BLU-L*UK*10012345678902~
+PID*F*08***ORGANIC COTTON BATH TOWEL ROYAL BLUE~
+PO4*10*1*EA~
+SDQ*EA*92*0101*25*0102*35*0103*40~</code></pre>
+      <p>
+        Here, Store <code>#0101</code> receives <code>25 EA</code>, Store <code>#0102</code> receives <code>35 EA</code>, and Store <code>#0103</code> receives <code>40 EA</code>—summing to exactly <code>100 EA</code> (<code>PO102</code>). You can flatten multi-store <code>SDQ</code> segments into individual warehouse picking rows using the <a href="https://ediparse.com/tools/edi-to-csv-excel">EDI to CSV / Excel Converter</a> or export directly to fulfillment via the <a href="https://ediparse.com/integrations/edi-850-to-shipstation-csv">EDI 850 to ShipStation CSV Integration</a>.
+      </p>
+
+      <h3>2.2 Implied Two-Decimal (<code>N2</code>) Formatting in <code>TDS</code> and <code>SAC05</code></h3>
+      <p>
+        While line-item unit prices in <a href="https://ediparse.com/reference/x12-segments/po1-baseline-item-data-qualifiers"><code>PO104</code> / <code>IT104</code></a> use explicit decimals (type <code>R</code>, e.g., <code>12.50</code>), both the <a href="https://ediparse.com/reference/x12-segments/tds-total-monetary-value-implied-decimal"><code>TDS</code> (Total Monetary Value Summary)</a> and <a href="https://ediparse.com/reference/x12-segments/sac-service-promotion-allowance-charge"><code>SAC05</code> (Service, Promotion, Allowance Amount)</a> segments use strict <code>N2</code> implied two-decimal integers:
+      </p>
+      <pre><code>TDS*230500*233000*225840*4660~
+SAC*A*D240***2500**********PROMOTIONAL ALLOWANCE~</code></pre>
+      <p>
+        Sending an explicit decimal point (e.g., <code>TDS*2305.00~</code> or <code>SAC*A*D240***25.00~</code>) causes immediate AP rejection via an <a href="https://ediparse.com/transactions/edi-824-application-advice">EDI 824 Application Advice</a> (<code>TED*848</code>). Use the <a href="https://ediparse.com/tools/edi-850-to-810-invoice-generator">EDI 850 to 810 Invoice Generator</a> to compute exact <code>N2</code> cent integers automatically.
+      </p>
+
+      <h3>2.3 Target 5-Tier <code>S-O-T-P-I</code> Hierarchy &amp; <code>SSCC-18</code> Modulo-10 Barcodes</h3>
+      <p>
+        Big-box distribution centers require a 5-level <a href="https://ediparse.com/reference/x12-segments/hl-hierarchical-level-sotpi"><code>HL</code> (Hierarchical Level)</a> tree inside every <a href="https://ediparse.com/tools/edi-850-to-856-asn-generator">EDI 856 Advance Ship Notice</a>: <strong>Shipment (<code>S</code>) &rarr; Order (<code>O</code>) &rarr; Tare/Pallet (<code>T</code>) &rarr; Pack/Carton (<code>P</code>) &rarr; Item (<code>I</code>)</strong>. At the Tare and Pack levels, the <a href="https://ediparse.com/reference/x12-segments/man-marks-and-numbers-sscc18"><code>MAN*GM</code> segment</a> carries the 20-digit GS1-128 container ID (AI <code>00</code> + 18-digit <code>SSCC-18</code>). Verify check digits with the <a href="https://ediparse.com/tools/sscc-18-check-digit-calculator">SSCC-18 Check Digit Calculator</a> and generate physical 4x6 thermal labels with the <a href="https://ediparse.com/tools/gs1-128-shipping-label-generator">GS1-128 Shipping Label Generator</a>.
+      </p>
+    </section>
+
+    <section id="directory">
+      <h2>3. Complete EDIParse Developer &amp; ERP Integration Directory</h2>
+      <p>
+        Explore client-side converters, ERP accounting bridges, and X12 segment specifications hosted on <a href="https://ediparse.com">EDIParse.com</a>:
+      </p>
+      <div class="grid-3">
+        <div class="nav-card">
+          <h4><a href="https://ediparse.com/tools">Interactive EDI Tools</a></h4>
+          <ul>
+            <li><a href="https://ediparse.com/tools/edi-viewer-inspector">ANSI X12 EDI Viewer &amp; Inspector</a></li>
+            <li><a href="https://ediparse.com/tools/edi-to-csv-excel">EDI to CSV / Excel Converter</a></li>
+            <li><a href="https://ediparse.com/tools/edi-to-json-xml">EDI to JSON / XML Converter</a></li>
+            <li><a href="https://ediparse.com/tools/edi-850-to-856-asn-generator">EDI 850 to 856 ASN Generator</a></li>
+            <li><a href="https://ediparse.com/tools/edi-850-to-810-invoice-generator">EDI 850 to 810 Invoice Generator</a></li>
+            <li><a href="https://ediparse.com/tools/gs1-128-shipping-label-generator">GS1-128 Shipping Label Generator</a></li>
+            <li><a href="https://ediparse.com/tools/sscc-18-check-digit-calculator">SSCC-18 Check Digit Calculator</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-card">
+          <h4><a href="https://ediparse.com/integrations">ERP &amp; Accounting Bridges</a></h4>
+          <ul>
+            <li><a href="https://ediparse.com/integrations/edi-850-to-quickbooks-desktop-iif">EDI 850 to QuickBooks Desktop (.IIF)</a></li>
+            <li><a href="https://ediparse.com/integrations/edi-850-to-quickbooks-online-csv">EDI 850 to QuickBooks Online CSV</a></li>
+            <li><a href="https://ediparse.com/integrations/edi-810-to-quickbooks-iif">EDI 810 Invoice to QuickBooks (.IIF)</a></li>
+            <li><a href="https://ediparse.com/integrations/edi-850-to-shopify-csv">EDI 850 to Shopify Orders CSV</a></li>
+            <li><a href="https://ediparse.com/integrations/edi-810-to-xero-csv">EDI 810 Invoice to Xero CSV</a></li>
+            <li><a href="https://ediparse.com/integrations/edi-850-to-shipstation-csv">EDI 850 to ShipStation CSV</a></li>
+            <li><a href="https://ediparse.com/integrations/sps-commerce-csv-alternative">SPS Commerce CSV Export Alternative</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-card">
+          <h4><a href="https://ediparse.com/retailers">Retailer Hubs</a> &amp; <a href="https://ediparse.com/reference">X12 Reference</a></h4>
+          <ul>
+            <li><a href="https://ediparse.com/retailers/walmart-edi-850-856-810-converter">Walmart Supplier One EDI Converter</a></li>
+            <li><a href="https://ediparse.com/retailers/target-partners-online-edi-converter">Target Partners Online EDI Converter</a></li>
+            <li><a href="https://ediparse.com/retailers/amazon-vendor-central-edi-850-856">Amazon Vendor Central EDI Toolkit</a></li>
+            <li><a href="https://ediparse.com/retailers/home-depot-edi-compliance-converter">The Home Depot EDI Compliance Hub</a></li>
+            <li><a href="https://ediparse.com/retailers/costco-edi-850-to-excel-quickbooks">Costco Depot EDI 850 to QuickBooks</a></li>
+            <li><a href="https://ediparse.com/retailers/lowes-edi-translator">Lowe's Supplier EDI Translator</a></li>
+            <li><a href="https://ediparse.com/retailers/kroger-edi-850-856-converter">Kroger EDI 850 &amp; 856 Converter</a></li>
+            <li><a href="https://ediparse.com/reference/x12-segments">ANSI X12 Segment Dictionary</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        Open-Source ANSI X12 Retail Sample Dataset &bull; Maintained by <a href="https://ediparse.com">EDIParse.com</a> &bull;
+        <a href="https://ediparse.com/pricing">Pricing</a> &bull;
+        <a href="https://ediparse.com/security">Zero-Upload Client-Side Security</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
